@@ -85,5 +85,6 @@ bits = (abits+1)/2;
 %%% Third peak:
 %%% bit_errors = bit_errors + 0
 %%% total_bits = totbal_bits + 127
-%  filestuff = fopen('PN.bin','w')
-% fwrite(filestuff,colt4','float32','n')
+ filestuff = fopen('testDataPN.bin','w')
+fwrite(filestuff,colt4','float32','n')
+fclose(filestuff);
