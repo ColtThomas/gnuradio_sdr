@@ -86,5 +86,6 @@ bits = (abits+1)/2;
 %%% bit_errors = bit_errors + 0
 %%% total_bits = totbal_bits + 127
  filestuff = fopen('testDataPN.bin','w')
-fwrite(filestuff,colt4','float32','n')
+fwrite(filestuff,bits','float32','ieee-le')
 fclose(filestuff);
+csvwrite('copy.csv',colt4');

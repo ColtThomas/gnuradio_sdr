@@ -25,19 +25,21 @@
 %%% initializations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Phase PLL
+%%% Phase PLL - see pg 737
 
-BnTsp = 0.02;
-zetap = 0.7071;
-N = 2;
-kpp = 18.33;
-k0p = 1;
-temp = BnTsp/(zetap + 0.25/zetap);
+BnTsp = 0.02; % Equivalent loop bandwidth (eq 59)
+zetap = 0.7071; % damping coefficient
+N = 2;  % Sample rate/symbol rate, or symbols per sample
+kpp = 18.33;  % gain of the loop filter. This can control how fast your PLL can lock, and the step sizes it takes to lock.
+k0p = 1;  % this is your constant of proportionality, or your vco gain. IRL it varies, but in code we can force it to be 1
+            % technically Kp can do the same as Kpp (eq C.11) but it is
+            % better to deal with kp since it is further up the PLL
+temp = BnTsp/(zetap + 0.25/zetap); % if you look at eq C.59 you will notice that this almost the exact equation...
 denom = 1 + 2*zetap/N*temp + temp*temp/(N*N);
-k0kpk1p = 4*zetap/N*temp/denom;
-k0kpk2p = 4*temp*temp/(N*N*denom);
-k1p = k0kpk1p/(kpp*k0p);
-k2p = k0kpk2p/(kpp*k0p);
+k0kpk1p = 4*zetap/N*temp/denom;  % eq C.59 a - this is the discrete time implementation of a pll
+k0kpk2p = 4*temp*temp/(N*N*denom); % eq C.59 b
+k1p = k0kpk1p/(kpp*k0p); % proportional gain - eq C. 19
+k2p = k0kpk2p/(kpp*k0p); % k2 is the ideal integrator gain
 
 b0p = k1p + k2p;
 b1p = -k1p;
@@ -151,10 +153,14 @@ plotstheta = NaN*zeros(samples_per_buffer2,1);
 %%% end initializing the plot variables
 
 aout = zeros(fix(samples_per_buffer2/2),1);
+x=zeros(fix(samples_per_buffer2),1);
+y=zeros(fix(samples_per_buffer2),1);
+testvec = zeros(fix(samples_per_buffer2),1);
 bits = zeros(fix(samples_per_buffer2),1);
 pk = 1;
 bk = 1;
 n = 1;
+derp = 1;
 for sample_idx = 1:2:samples_per_buffer
     
     %%% compute the outputs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -164,9 +170,14 @@ for sample_idx = 1:2:samples_per_buffer
     rq1 = imag(r(sample_idx+1));
     ri = real(r(sample_idx));
     rq = imag(r(sample_idx));
-    
+    if derp<=2
+       ri
+       ri1
+       rq
+       rq1
+    end
     %%% compute detection filter outputs
-    x = DF(1) * (ri1 + S4Di(18)) ...
+    x(derp) = DF(1) * (ri1 + S4Di(18)) ...
         + DF(2) * (ri + S4Di(17)) ...
         + DF(3) * (S4Di(1) + S4Di(16)) ...
         + DF(4) * (S4Di(2) + S4Di(15)) ...
@@ -177,7 +188,7 @@ for sample_idx = 1:2:samples_per_buffer
         + DF(9) * (S4Di(7) + S4Di(10)) ...
         + DF(10) * (S4Di(8) + S4Di(9));
     
-    y = DF(1) * (rq1 + S4Dq(18)) ...
+    y(derp) = DF(1) * (rq1 + S4Dq(18)) ...
         + DF(2) * (rq + S4Dq(17)) ...
         + DF(3) * (S4Dq(1) + S4Dq(16)) ...
         + DF(4) * (S4Dq(2) + S4Dq(15)) ...
@@ -187,10 +198,20 @@ for sample_idx = 1:2:samples_per_buffer
         + DF(8) * (S4Dq(6) + S4Dq(11)) ...
         + DF(9) * (S4Dq(7) + S4Dq(10)) ...
         + DF(10) * (S4Dq(8) + S4Dq(9));
+    testvec(derp) = x(derp)+1j*y(derp);
+    % debug
+    if derp<=4
+       S4Di'
+    end
+    %-----------------------------------------------------------------------------------------------
+    
     
     %%% rotate DF outputs
-    xr = x*CTHETA + y*STHETA;
-    yr = -x*STHETA + y*CTHETA;
+    xr = x(derp)*CTHETA + y(derp)*STHETA;
+    yr = -x(derp)*STHETA + y(derp)*CTHETA;
+    derp = derp+1;
+
+    %-----------------------------------------------------------------------------------------------
     
     %%% if STROBE make decisions and compute timing and phase errors
     if STROBE == 0
@@ -370,7 +391,7 @@ grid on;
 ylabel('\mu');
 axis([1 n-1 -0.2 1.2]);
 
-figure(2);
+figure(2); % constellation
 % plot(real(aout(1:pk-1)),imag(aout(1:pk-1)),'.');
 plot(real(aout(750:pk-1)),imag(aout(750:pk-1)),'.');
 grid on;
@@ -394,8 +415,8 @@ grid on;
 axis([1 n-1 -10 10]);
 ylabel('e_t');
 
-figure(4);
-load pn9.mat;
-maggie = xcorr(2*pn9-1,2*bits(1:bk-1)-1);
-plot(1:bk-1,maggie(1:bk-1));
-grid on;
+% figure(4);
+% load pn9.mat;
+% maggie = xcorr(2*pn9-1,2*bits(1:bk-1)-1);
+% plot(1:bk-1,maggie(1:bk-1));
+% grid on;
