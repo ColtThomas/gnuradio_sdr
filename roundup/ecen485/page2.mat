@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Simulink Exercises for "Digital Communications: A Discrete-Time Approach," by M. Rice</title>
+		<link rel="stylesheet" type="text/css" href="styles/infoPage.css"/>
+		<!--[if lte IE 6]>
+		<style type="text/css">
+			#OrganizationBar div.title {
+				_background: none;
+				_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/titleFade.png');}
+		</style>
+		<![endif]-->
+	</head>
+    
+	<body class="infoPage">
+    	<div id="Wrapper">
+            <div id="ByuBar">
+                <a href="http://www.byu.edu" class="ByuTitle" tabindex="4"><img src="images/byuTitleLong.gif" alt="Brigham Young University Homepage" /></a>
+                <div id="ByuBarLinks">
+    
+                </div>
+            </div>
+		
+            <div id="OrganizationBar">
+                <img src="images/organizationSmall.jpg" class="picture" /> 
+                <div class="title">
+                    <!-- <h1><a href="http://ee.byu.edu" id="MainSiteLink" style="text-decoration:none">ECEN</a></h1> -->
+                    <h1>Digital Communications: A Discrete-Time Approach<br>by Michael Rice</h1>
+                </div>
+                <img src="images/titleFade.png" class="orgBackground" alt="" />
+            </div>
+            
+            <div id="MenuBar">
+            	<div id="MenuBarLinks">
+            		<a href="index.phtml">Simulink Exercises</a> |
+            	    <a href="page2.phtml">Simulink Files</a> |
+            	    <a href="page3.phtml">About the textbook</a> |
+            	</div>
+            </div>
+		
+            <div style="clear: both;"></div>
+
+<div id="ContentArea">
+    <div id="Content">
+        <div class="contentArea">
+			<h1>Simulink Files</h1>
+			<table cellpadding="5">
+				<tr>
+					<th>Filename</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td><a href="data/bb2data.mat">bb2data.mat</a></td>
+					<td>Source file for the Binary Baseband Signaling Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/bb8data.mat">bb8data.mat</a></td>
+					<td>Source file for the M-ary Baseband Signaling Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/bpskdata.mat">bpskdata.mat</a></td>
+					<td>Source file for the BPSK Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/qpskdata.mat">qpskdata.mat</a></td>
+					<td>Source file for QPSK Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/psk8data.mat">psk8data.mat</a></td>
+					<td>Source file for MPSK Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/qam16data.mat">qam16data.mat</a></td>
+					<td>Source file for M-ary QAM Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/oqpskdata.mat">oqpskdata.mat</a></td>
+					<td>Source file for OQPSK Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/bpskcruwdata.mat">bpskcruwdata.mat</a></td>
+					<td>Source file for BPSK Phase Synchronization (UW) Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/bpskcrdedata.mat">bpskcrdedata.mat</a></td>
+					<td>Source file for BPSK Phase Synchronization (DE) Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/qpskcruwdata.mat">qpskcruwdata.mat</a></td>
+					<td>Source file for QPSK Phase Synchronization (UW) Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/qpskcrdedata.mat">qpskcrdedata.mat</a></td>
+					<td>Source file for QPSK Phase Synchronization (DE) Simulink Exercise</td>
+				</tr>
+				<tr>
+					<td><a href="data/oqpskcrdata.mat">oqpskcrdata.mat</a></td>
+					<td>Source file for OQPSK Phase Synchronization Simulink Exercise</td>
+				</tr>
+				<tr><td><a href="data/bbtrdata.mat">bbtrdata.mat</a></td>
+					<td>Source file for Binary PAM Timing Synchronization Simulink Exercise</td>
+				</tr>
+				<tr><td><a href="data/bpsktrdata.mat">bpsktrdata.mat</a></td>
+					<td>Source file for BPSK Timing Synchronization Simulink Exercise</td>
+			</table>
+        </div>
+    </div>
+</div>
+
+            <div style="clear: both;"></div>
+            <div id="RelatedLinks"></div>
+            <div id="BottomBar">
+                <a href="http://www.byu.edu" target="_blank">Brigham Young University - Provo</a> | 
+                <a href="http://www.et.byu.edu" target="_blank">Fulton College of Engineering and Technology</a> | 
+                <a href="http://www.lds.org" target="_blank">The Church of Jesus Christ of Latter-day Saints</a><br/>
+                <a href="http://www.ee.byu.edu">Department of Electrical and Computer Engineering</a>, BYU, Provo, UT 84602 - (801)422-4012 - Copyright 2009. All Rights Reserved 
+            </div>
+        </div>
+	</body>
+</html>
